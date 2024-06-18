@@ -1,0 +1,41 @@
+{
+  "name": "@jupri-lab/store-core",
+  "version": "0.1.0",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "description": "A lightweight, easy-to-integrate, and type-safe state management library",
+  "scripts": {
+    "build:watch": "rollup -c --watch",
+    "build": "rollup -c",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "files": [
+    "dist/*",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "author": {
+    "name": "Mikhael Esa",
+    "email": "mikhaelesaa@gmail.com",
+    "url": "https://linkedin.com/in/mikhael-esa"
+  },
+  "repository": {
+    "url": "https://github.com/JupriLab/<repoName>.git",
+    "directory": "packages/<packageName>",
+    "type": "git"
+  },
+  "homepage": "https://github.com/JupriLab/<repoName>",
+  "bugs": {
+    "url": "https://github.com/JupriLab/<repoName>/issues"
+  }
+}

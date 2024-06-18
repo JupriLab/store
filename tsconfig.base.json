@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "types": ["node"],
+    "lib": ["esnext", "DOM"],
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@i18n-core/*": ["packages/i18n-core/src/*"]
+    }
+  },
+  "include": ["packages/**/*", "apps/**/*"]
+}
