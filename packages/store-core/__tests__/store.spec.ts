@@ -38,19 +38,19 @@ describe("Store", () => {
     expect(store.get()).toEqual(initialState);
   });
   it("should return the correct value for a specific key", () => {
-    expect(store.getOne("firstName")).toBe("John");
-    expect(store.getOne("lastName")).toBe("Doe");
+    expect(store.get().firstName).toBe("John");
+    expect(store.get().lastName).toBe("Doe");
   });
   it("should update the state when dispatching an action without payload", () => {
     store.dispatch("birthday", undefined);
-    expect(store.getOne("age")).toBe(22);
+    expect(store.get().age).toBe(22);
 
     store.dispatch("work", undefined);
-    expect(store.getOne("networth")).toBe(110000);
+    expect(store.get().networth).toBe(110000);
   });
   it("should update the state when dispatching an action with payload", () => {
     store.dispatch("setFirstName", { firstName: "Jack" });
-    expect(store.getOne("firstName")).toBe("Jack");
+    expect(store.get().firstName).toBe("Jack");
   });
   it("should throw an error if the action does not exist", () => {
     expect(() => store.dispatch("nonExistingAction" as any, undefined)).toThrow(
