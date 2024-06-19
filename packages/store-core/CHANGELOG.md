@@ -1,3 +1,7 @@
+# v0.1.1
+
+- Removed `getOne` and fully rely on `get`.
+
 # v0.1.0
 
 - Created `Store` class to hold the states and actions
