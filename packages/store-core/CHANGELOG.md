@@ -1,3 +1,15 @@
+# v0.2.0
+
+- Created new `CombineStore` class for combining multiple individual stores to have a single source of truth.
+  - User can then select which store they want to interact with via `getStore`
+  - TypeSafety to ensure users don't interact with a non-existent store.
+- Upgraded TypeScript to v5.5.2.
+- Improved `dispatch` second parameter type using tuples.
+  - The second parameter now depends fully on the actions. If the action has payload and the user is dispatching that action, then it will ask for a second parameter and vice versa.
+- Updated store test cases.
+- Created test cases for `CombineStore`.
+- Update some `package.json` properties
+
 # v0.1.1
 
 - Removed `getOne` and fully rely on `get`.
