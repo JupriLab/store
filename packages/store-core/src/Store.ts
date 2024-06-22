@@ -18,11 +18,13 @@ export default class Store<
 
   dispatch<T extends keyof TActions>(
     actionName: T,
-    payload: Parameters<TActions[T]>[1],
+    ...payload: Parameters<TActions[T]>[1] extends void
+      ? []
+      : [Parameters<TActions[T]>[1]]
   ) {
     const action = this.actions[actionName] as TActions[T] | undefined;
     if (action) {
-      this.states = action(this.states, payload);
+      this.states = action(this.states, payload[0]);
       this.notify();
     } else {
       throw new Error(`Action ${String(actionName)} is not defined`);

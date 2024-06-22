@@ -19,6 +19,14 @@ const actions = {
     ...state,
     firstName: payload.firstName,
   }),
+  setName: (
+    state: typeof initialState,
+    payload: { firstName: string; lastName: string },
+  ) => ({
+    ...state,
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+  }),
   work: (state: typeof initialState) => ({
     ...state,
     networth: state.networth + 10000,
@@ -42,15 +50,16 @@ describe("Store", () => {
     expect(store.get().lastName).toBe("Doe");
   });
   it("should update the state when dispatching an action without payload", () => {
-    store.dispatch("birthday", undefined);
+    store.dispatch("birthday");
     expect(store.get().age).toBe(22);
 
-    store.dispatch("work", undefined);
+    store.dispatch("work");
     expect(store.get().networth).toBe(110000);
   });
   it("should update the state when dispatching an action with payload", () => {
-    store.dispatch("setFirstName", { firstName: "Jack" });
+    store.dispatch("setName", { firstName: "Jack", lastName: "Wazowski" });
     expect(store.get().firstName).toBe("Jack");
+    expect(store.get().lastName).toBe("Wazowski");
   });
   it("should throw an error if the action does not exist", () => {
     expect(() => store.dispatch("nonExistingAction" as any, undefined)).toThrow(
@@ -61,7 +70,7 @@ describe("Store", () => {
     const subscriber = jest.fn();
     store.subscribe(subscriber);
 
-    store.dispatch("birthday", undefined);
+    store.dispatch("birthday");
     expect(subscriber).toHaveBeenCalledWith({ ...initialState, age: 22 });
 
     store.dispatch("setFirstName", { firstName: "Jack" });
@@ -72,7 +81,7 @@ describe("Store", () => {
     });
 
     store.unsubscribe(subscriber);
-    store.dispatch("birthday", undefined);
+    store.dispatch("birthday");
 
     expect(subscriber).toHaveBeenCalledTimes(2);
   });

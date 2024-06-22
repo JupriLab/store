@@ -1,4 +1,6 @@
+import { CombineStores } from "./CombineStores";
 import Store from "./Store";
+
 export type * from "./types";
 
-export { Store };
+export { CombineStores, Store };

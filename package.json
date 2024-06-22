@@ -3,8 +3,7 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "apps/test",
-    "apps/react-test"
+    "apps/*"
   ],
   "scripts": {
     "watch:store-core": "npm -w packages/store-core run build:watch",
@@ -18,12 +17,12 @@
   },
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/JupriLab/<repoName>.git",
+    "url": "https://github.com/JupriLab/store.git",
     "type": "git"
   },
-  "homepage": "https://github.com/JupriLab/<repoName>",
+  "homepage": "https://github.com/JupriLab/store",
   "bugs": {
-    "url": "https://github.com/JupriLab/<repoName>/issues"
+    "url": "https://github.com/JupriLab/store/issues"
   },
   "devDependencies": {
     "@jupri-lab/eslint-config-typescript": "^0.1.2",
@@ -44,6 +43,6 @@
     "rollup-plugin-typescript2": "0.36.0",
     "ts-jest": "29.1.4",
     "ts-node": "10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "5.5.2"
   }
 }
