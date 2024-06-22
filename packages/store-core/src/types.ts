@@ -4,6 +4,7 @@ export interface IStoreConfigs<
 > {
   actions: TActions;
   initialState: TInitialState;
+  middlewares?: TMiddleware[];
   name: string;
 }
 
@@ -13,3 +14,5 @@ export type TAction<TInitialState, TPayload = void> = (
 ) => TInitialState;
 
 export type TSubscriber<TInitialState> = (state: TInitialState) => void;
+
+export type TMiddleware = (state: any, next: any, action: any) => void;

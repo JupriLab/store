@@ -1,3 +1,8 @@
+# June 22th 2024
+
+- Created `TMiddleware` for the base type of creating and applying middleware
+- `Store` accepts middlewares as optional configuration.
+
 # v0.2.0
 
 - Created new `CombineStore` class for combining multiple individual stores to have a single source of truth.
