@@ -83,6 +83,52 @@ userStore.subscribe(subscriber);
 userStore.unsubscribe(subscriber);
 ```
 
+### Combining Stores
+
+If you want to gather all of your stores into one single source of truth you can do that by using `CombineStores`.
+
+```tsx
+const userStore = new Store({});
+const cartStore = new Store({});
+// Combine the individual stores
+// The key will be used to identify which store you want to interact via selector
+const userCartStore = new CombineStores({
+  user: userStore,
+  cart: cartStore,
+});
+
+// Using the combined stores
+const user = userCartStore.getStore((selector) => selector.user);
+const cart = userCartStore.getStore((selector) => selector.cart);
+
+user.dispatch("updateName", { firstName: "James" });
+```
+
+### Adding Middlewares
+
+Middlewares allows you to perform additional operations or logic before the action reaches the reducer (or state updater) and modifies the state. Rules for middleware are the following:
+
+- Middleware will be invoked during dispatch and before action.
+- Store cannot contain duplicate middleware or in other word unique. Duplicated middleware will be automatically removed.
+- Middleware should return `next()` function in order to finish the chain.
+
+Here's an example of how you can create your own custom middleware.
+
+```tsx
+const logger: TMiddleware = ({ action, actionName, payload, state }, next) => {
+  console.log("Dispatched action: ", action);
+  console.log("Dispatched action name: ", actionName);
+  console.log("Called with payload: ", payload);
+  console.log("Current state: ", state);
+
+  return next();
+};
+
+const myStore = new Store({
+  middlewares: [logger],
+});
+```
+
 ## Key Features
 
 - **Type-Safe:** Leverages TypeScript's type system to ensure type safety throughout state management operations.

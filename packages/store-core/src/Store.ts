@@ -1,3 +1,4 @@
+import MiddlewareManager from "./MiddlewareManager";
 import type { IStoreConfigs, TAction, TSubscriber } from "./types";
 
 export default class Store<
@@ -7,9 +8,11 @@ export default class Store<
   private subscribers: Set<TSubscriber<TInitialState>> = new Set();
   private states: TInitialState;
   private actions: TActions;
+  private middleware: MiddlewareManager;
   constructor(configs: IStoreConfigs<TInitialState, TActions>) {
     this.states = configs.initialState;
     this.actions = configs.actions;
+    this.middleware = new MiddlewareManager(configs.middlewares || []);
   }
 
   get(): TInitialState {
@@ -24,8 +27,17 @@ export default class Store<
   ) {
     const action = this.actions[actionName] as TActions[T] | undefined;
     if (action) {
-      this.states = action(this.states, payload[0]);
-      this.notify();
+      const middlewareChainSuccessful = this.middleware.apply({
+        action,
+        actionName: action.name,
+        payload,
+        state: this.states,
+      });
+
+      if (middlewareChainSuccessful) {
+        this.states = action(this.states, payload[0]);
+        this.notify();
+      }
     } else {
       throw new Error(`Action ${String(actionName)} is not defined`);
     }

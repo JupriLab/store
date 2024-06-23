@@ -1,3 +1,17 @@
+# v0.3.0
+
+- Created `MiddlewareManager` class for managing middlewares and applying middlewares.
+  - Every middleware are unique, which mean there won't be any duplicated middleware even though the user inserted multiple duplicate middlewares.
+  - Middleware should return next, if not then the chain will be broken and cannot finish.
+- Refactor apply from recursive to loop.
+- `Store` checks middleware chain status before invoked. If chain failed then action won't be invoked.
+- Created `NextFunction` type
+- Updated README.md
+- Fixed `apply` to not only check for `undefined` but also `falsy`
+- Created test cases for `MiddlewareManager`
+- Created `TMiddleware` for the base type of creating and applying middleware
+- `Store` accepts middlewares as optional configuration.
+
 # v0.2.0
 
 - Created new `CombineStore` class for combining multiple individual stores to have a single source of truth.
