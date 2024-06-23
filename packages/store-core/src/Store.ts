@@ -1,3 +1,4 @@
+import Middleware from "./Middleware";
 import type { IStoreConfigs, TAction, TSubscriber } from "./types";
 
 export default class Store<
@@ -7,9 +8,11 @@ export default class Store<
   private subscribers: Set<TSubscriber<TInitialState>> = new Set();
   private states: TInitialState;
   private actions: TActions;
+  private middleware: Middleware;
   constructor(configs: IStoreConfigs<TInitialState, TActions>) {
     this.states = configs.initialState;
     this.actions = configs.actions;
+    this.middleware = new Middleware(configs.middlewares || []);
   }
 
   get(): TInitialState {
@@ -24,6 +27,12 @@ export default class Store<
   ) {
     const action = this.actions[actionName] as TActions[T] | undefined;
     if (action) {
+      this.middleware.apply({
+        action,
+        actionName: action.name,
+        payload,
+        state: this.states,
+      });
       this.states = action(this.states, payload[0]);
       this.notify();
     } else {

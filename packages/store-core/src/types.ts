@@ -15,4 +15,12 @@ export type TAction<TInitialState, TPayload = void> = (
 
 export type TSubscriber<TInitialState> = (state: TInitialState) => void;
 
-export type TMiddleware = (state: any, next: any, action: any) => void;
+export type TMiddleware = (
+  params: {
+    action: TAction<any>;
+    actionName: string;
+    payload: any;
+    state: any;
+  },
+  next: () => void,
+) => void;
