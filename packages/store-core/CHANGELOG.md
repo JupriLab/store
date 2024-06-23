@@ -6,6 +6,9 @@
 - Refactor apply from recursive to loop.
 - `Store` checks middleware chain status before invoked. If chain failed then action won't be invoked.
 - Created `NextFunction` type
+- Updated README.md
+- Fixed `apply` to not only check for `undefined` but also `falsy`
+- Created test cases for `MiddlewareManager`
 
 # June 22th 2024
 

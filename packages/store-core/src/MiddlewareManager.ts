@@ -20,7 +20,7 @@ export default class MiddlewareManager {
     const middlewareResults = middlewareArray.map((middleware) => {
       const next = () => true;
       const result = middleware(params, next);
-      return typeof result === "undefined" ? false : true;
+      return !result ? false : true;
     });
 
     return middlewareResults.every((x) => x);
