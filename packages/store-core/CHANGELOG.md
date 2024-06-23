@@ -1,4 +1,4 @@
-# June 23th 2024
+# v0.3.0
 
 - Created `MiddlewareManager` class for managing middlewares and applying middlewares.
   - Every middleware are unique, which mean there won't be any duplicated middleware even though the user inserted multiple duplicate middlewares.
@@ -9,9 +9,6 @@
 - Updated README.md
 - Fixed `apply` to not only check for `undefined` but also `falsy`
 - Created test cases for `MiddlewareManager`
-
-# June 22th 2024
-
 - Created `TMiddleware` for the base type of creating and applying middleware
 - `Store` accepts middlewares as optional configuration.
 
