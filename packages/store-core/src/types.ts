@@ -15,6 +15,8 @@ export type TAction<TInitialState, TPayload = void> = (
 
 export type TSubscriber<TInitialState> = (state: TInitialState) => void;
 
+export type TNextFunction = () => boolean;
+
 export type TMiddleware = (
   params: {
     action: TAction<any>;
@@ -22,5 +24,5 @@ export type TMiddleware = (
     payload: any;
     state: any;
   },
-  next: () => void,
-) => void;
+  next: TNextFunction,
+) => ReturnType<TNextFunction> | undefined;

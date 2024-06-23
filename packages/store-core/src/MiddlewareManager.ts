@@ -1,6 +1,6 @@
 import type { TAction, TMiddleware } from "./types";
 
-export default class Middleware {
+export default class MiddlewareManager {
   private middlewareFns: Set<TMiddleware>;
 
   constructor(middlewares: TMiddleware[]) {
@@ -14,12 +14,15 @@ export default class Middleware {
     state: any;
   }) {
     const middlewareArray = Array.from(this.middlewareFns);
-    const run = (index: number) => {
-      // Exits the middleware if there's no middleware in the array
-      if (index >= middlewareArray.length) return;
-      const currentMiddleware = middlewareArray[index];
-      currentMiddleware(params, () => run(index + 1));
-    };
-    run(0);
+
+    if (middlewareArray.length === 0) return true;
+
+    const middlewareResults = middlewareArray.map((middleware) => {
+      const next = () => true;
+      const result = middleware(params, next);
+      return typeof result === "undefined" ? false : true;
+    });
+
+    return middlewareResults.every((x) => x);
   }
 }

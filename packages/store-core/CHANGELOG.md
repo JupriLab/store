@@ -1,3 +1,12 @@
+# June 23th 2024
+
+- Created `MiddlewareManager` class for managing middlewares and applying middlewares.
+  - Every middleware are unique, which mean there won't be any duplicated middleware even though the user inserted multiple duplicate middlewares.
+  - Middleware should return next, if not then the chain will be broken and cannot finish.
+- Refactor apply from recursive to loop.
+- `Store` checks middleware chain status before invoked. If chain failed then action won't be invoked.
+- Created `NextFunction` type
+
 # June 22th 2024
 
 - Created `TMiddleware` for the base type of creating and applying middleware
