@@ -33,21 +33,16 @@ export default class Store<
         payload,
         state: this.states,
       });
-
       if (middlewareChainSuccessful) {
         const result = action(this.states, payload[0]);
-        // Handle async action
         if (result instanceof Promise) {
           result
             .then((newState) => {
               this.states = newState;
               this.notify();
             })
-            .catch((error) => {
-              throw new Error(
-                `Error in async action ${String(actionName)}:`,
-                error,
-              );
+            .catch(() => {
+              throw new Error(`Error in async action ${String(actionName)}:`);
             });
         } else {
           this.states = result;

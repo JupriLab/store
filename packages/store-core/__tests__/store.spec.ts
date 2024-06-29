@@ -12,6 +12,15 @@ const actions = {
     ...state,
     age: state.age + 1,
   }),
+  fetchUser: async (state: typeof initialState) => {
+    const promise = new Promise<string>((resolve) => {
+      setTimeout(() => {
+        resolve("Jane");
+      }, 1000);
+    });
+    const result = await promise;
+    return { ...state, firstName: result };
+  },
   setFirstName: (
     state: typeof initialState,
     payload: { firstName: string },
@@ -89,5 +98,23 @@ describe("Store", () => {
     const subscriber = jest.fn();
     store.subscribe(subscriber);
     store.unsubscribe(subscriber);
+  });
+  it("should update the state when dispatching an async action", () => {
+    store.dispatch("fetchUser");
+    setTimeout(() => {
+      expect(store.get().firstName).toBe("Jane");
+    }, 1000);
+  });
+  it("should notify subscribers when the state changes with async action", () => {
+    const subscriber = jest.fn();
+    store.subscribe(subscriber);
+    store.dispatch("fetchUser");
+    setTimeout(() => {
+      expect(subscriber).toHaveBeenCalledWith({
+        ...initialState,
+        firstName: "Jane",
+        lastName: "Doe",
+      });
+    }, 1000);
   });
 });
