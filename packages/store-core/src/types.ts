@@ -11,7 +11,7 @@ export interface IStoreConfigs<
 export type TAction<TInitialState, TPayload = void> = (
   state: TInitialState,
   payload: TPayload,
-) => TInitialState;
+) => Promise<TInitialState> | TInitialState;
 
 export type TSubscriber<TInitialState> = (state: TInitialState) => void;
 

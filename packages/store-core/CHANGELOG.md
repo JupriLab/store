@@ -1,3 +1,9 @@
+# v1.0.0
+
+- Support async action
+- Stable release
+- Updated README.md
+
 # v0.3.0
 
 - Created `MiddlewareManager` class for managing middlewares and applying middlewares.

@@ -33,10 +33,21 @@ export default class Store<
         payload,
         state: this.states,
       });
-
       if (middlewareChainSuccessful) {
-        this.states = action(this.states, payload[0]);
-        this.notify();
+        const result = action(this.states, payload[0]);
+        if (result instanceof Promise) {
+          result
+            .then((newState) => {
+              this.states = newState;
+              this.notify();
+            })
+            .catch(() => {
+              throw new Error(`Error in async action ${String(actionName)}:`);
+            });
+        } else {
+          this.states = result;
+          this.notify();
+        }
       }
     } else {
       throw new Error(`Action ${String(actionName)} is not defined`);

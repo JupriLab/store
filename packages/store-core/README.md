@@ -7,7 +7,7 @@ A lightweight, type-safe, and versatile state management solution designed for s
 To install, you can add it to your project:
 
 ```bash
-$ npm install your-package-name
+$ npm install @jupri-lab/store-core
 ```
 
 ## Usage
@@ -15,6 +15,10 @@ $ npm install your-package-name
 This section covers the usage of JupriLab Store in a comprehensive way.
 
 ### Instantiating the Store
+
+A store typically has initialState and actions. Jupri Store supports asynchronous action without the need of adding middleware.
+
+Here's what a store looks like.
 
 ```tsx
 const userStore = new Store({
@@ -32,6 +36,10 @@ const userStore = new Store({
       ...state,
       age: state.age + 1,
     }),
+    fetchUser: async (state) => {
+      const result = await getUserService();
+      return { ...result };
+    },
   },
   name: "userStore",
 });
@@ -52,6 +60,9 @@ To use the actions that you have created, Store provides a `dispatch` method for
 ```tsx
 // The first parameter is the action name and the second parameter will be the payload
 userStore.dispatch("setFirstName", { firstName: "John" });
+
+// Asynchronous action
+userStore.dispatch("fetchUser");
 ```
 
 ### Subscribe
