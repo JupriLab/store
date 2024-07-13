@@ -1,0 +1,51 @@
+{
+  "name": "@jupri-lab/react-store",
+  "version": "1.0.0",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "description": "A lightweight, easy-to-integrate, and type-safe state management library for React",
+  "scripts": {
+    "build:watch": "rollup -c --watch",
+    "build": "rollup -c",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "files": [
+    "dist/*",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "jupri",
+    "juprilab",
+    "store"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Mikhael Esa",
+    "email": "mikhaelesaa@gmail.com",
+    "url": "https://linkedin.com/in/mikhael-esa"
+  },
+  "repository": {
+    "url": "https://github.com/JupriLab/store.git",
+    "directory": "packages/react-store",
+    "type": "git"
+  },
+  "homepage": "https://github.com/JupriLab/store",
+  "bugs": {
+    "url": "https://github.com/JupriLab/store/issues"
+  },
+  "dependencies": {
+    "@jupri-lab/store-core": "*"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}
